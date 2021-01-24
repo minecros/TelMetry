@@ -3,16 +3,38 @@
 #include <QtSql>
 #include <QSqlQuery>
 #include <QFile>
+#include <QString>
+#include <QVector>
 
 class Dane
 {
 public:
-    Dane();
+    Dane(QString fileName);
+    ~Dane();
+    QStringList getLabel();
+    QStringList getRow();
+    QList <QStringList>allData;
 
 private:
 
     QStringList label;
-    //QList <double>all;
+    QStringList row;
+    QFile file;
+
+    QString text;
+
+
+    bool isFileOpen = false;
+    bool isLabelSet = false;
+
+
+
+    void setLabel();
+    void setRow();
+    void readAll();
+
+
+
 
 
 };

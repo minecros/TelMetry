@@ -9,9 +9,16 @@
 #include <QtPrintSupport/QPrinter>
 #include <QtPrintSupport/QPrintDialog>
 #include <QListWidgetItem>
-#include "database.h"
 #include "dialogchoose.h"
 #include <QList>
+#include "dane.h"
+#include <QVector>
+#include <QLCDNumber>
+#include "dialogplot.h"
+#include <QtCharts>
+#include <QChartView>
+#include <QLineSeries>
+#include "about.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -23,30 +30,48 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
      double czas[10000];
 
 
 private slots:
+
     void on_horizontalScrollBar_valueChanged(int value);
     void on_actionOpen_triggered();
-
-
     void on_pushButton_clicked();
+    void on_pushButton_6_clicked();
+    void on_playbutton_clicked();
+    void changeData();
+    void on_stopButton_clicked();
+    void on_slowerButton_clicked();
+    void on_fasterButton_clicked();
+    void on_actionClose_triggered();
+    void on_actionAbout_triggered();
 
 private:
+
+
     Ui::MainWindow *ui;
-    QString currentFile = "";
-    QString fileName = "";
+    QString fileName;
     QStringList label;
-    QList <QStringList>all;
+    QStringList labelTab2;
+    QStringList labelTab3;
 
-    bool isLabelSet = false;
+    QList <QStringList>allData;
+    QList <QStringList*>tab2Data;
 
-    void openFile();
-    void setLabel(QString text);
-    void setRow(QString text, int i);
+    QList <QLCDNumber> lcd;
+    QVector <QLCDNumber*>LCDvector;
+    QSplitter *splitter = new QSplitter(Qt::Vertical);
+
+    QTimer *timer = new QTimer();
+    int time;
+    int scrValue;
+
+    bool ster = false;
+
 
 };
 #endif // MAINWINDOW_H
